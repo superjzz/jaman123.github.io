@@ -19,6 +19,29 @@ var _hmt = _hmt || [];
 })();
 </script>
 
+<style>
+#imageMenu{width:500px;height:200px;overflow:hidden;}
+
+/*动画样式*/
+#imageMenu ul *{transition:all linear 0.2s;}
+
+#imageMenu ul{width:800px;height:200px;padding: 0; margin: 0; list-style: none}
+#imageMenu li{float:left;}
+
+#imageMenu ul li a{width: 73px;}
+
+/*放大后的样式*/
+#imageMenu ul li.big a {width:200px;}
+
+#imageMenu li a{width:98px;height:200px;display:block;text-indent:9999px;border-right:2px solid #fff;cursor:pointer;overflow:hidden;}
+
+#imageMenu li.landscapes a{background:url(http://img.mukewang.com/53451c66000170b503200200.jpg) no-repeat;}
+#imageMenu li.people a{background:url(http://img.mukewang.com/53451cc900012a0303200200.jpg) no-repeat;}
+#imageMenu li.nature a{background:url(http://img.mukewang.com/53451d020001336503200200.jpg) no-repeat;}
+#imageMenu li.urban a{background:url(http://img.mukewang.com/53451d370001d17203200200.jpg) no-repeat;}
+#imageMenu li.abstract a{background:url(http://img.mukewang.com/53451d5700013fd203200200.jpg) no-repeat;}
+
+</style>
 
 </head>
 <body>
@@ -89,6 +112,55 @@ var _hmt = _hmt || [];
         <h1>Hello My World!</h1>
     </body>
 
+<div id="imageMenu">
+    <ul>
+	    <li class="landscapes">
+	    	<a href="#link1">Landscapes</a>
+	    </li>
+	    <li class="people big">
+	    	<a href="#link1">People</a>
+	    </li>
+	    <li class="nature">
+	    	<a href="#link1">Nature</a>
+	    </li>
+	    <li class="urban">
+	    	<a href="#link1">Urban</a>
+	    </li>
+	    <li class="abstract">
+	    	<a href="#link1">Abstract</a>
+	    </li>
+	</ul>
+</div>
+<script type="text/javascript">
+function bind(el,eventType,callback){
+    if(typeof el.addEventListener === 'function'){
+        el.addEventListener(eventType,callback);
+    }else if(typeof el.attechEvent === 'function'){
+        el.attachEvent('on'+eventType,callback);
+    }
+}
+
+function change(e){
+    var target=e.target;
+    var outer = document.getElementById('imageMenu');
+    var list = outer.getElementsByTagName('li');
+    for(var i=0;i<list.length;i++){
+        list[i].className = list[i].className.replace(/ ?big/g,'');
+    }
+    while(target.tagName!='LI' || target.tagName=='BODY'){
+        target=target.parentNode;
+    }
+    target.className += ' big';
+}
+
+(function(){
+    var outer = document.getElementById('imageMenu');
+    var list = outer.getElementsByTagName('li');
+    for(var i=0;i<list.length;i++){
+        bind(list[i],'mouseover',change);
+    }
+})();
+</script>
 
 </body>
 </html>
